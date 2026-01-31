@@ -564,8 +564,13 @@ class OMRQuizApp {
         // OMR 카드 업데이트 (정답/오답 표시)
         this.updateOMRDisplay();
 
-        // 결과 패널로 스크롤
-        document.getElementById('result-panel').scrollIntoView({ behavior: 'smooth' });
+        // 결과 패널로 스크롤 (OMR 섹션 내부에서만)
+        const omrSection = document.querySelector('.omr-section');
+        const resultPanel = document.getElementById('result-panel');
+        if (omrSection && resultPanel) {
+            // OMR 섹션의 맨 아래로 스크롤
+            omrSection.scrollTop = omrSection.scrollHeight;
+        }
 
         alert(`채점 완료!\n\n정답: ${correct}개\n오답: ${wrong}개\n미답: ${unanswered}개\n\n점수: ${percentage}점`);
     }
